@@ -83,9 +83,24 @@ function orderReview(pizzaId, newOrder) {
   reviewButtons.append(`<button class='removeButton ${pizza.id}'>Remove</button>`);
 }
 
+function attachEventListeners(newOrder) {
+  $("us#pizzas").on("click", "li", function() {
+    console.log("the id of this <li> is " + $(this).attr("class") + ".");
+    orderReview($(this).attr("class"), newOrder);
+  });
+  $("#reviewButtons").on("click", ".removeButton", function() {
+    let id = $(this).attr("class");
+    let cleanId = id.slice(12);
+    newOrder.deletePizza(cleanId);
+    $("#orderReview").hide();
+    displayPizzaDetails(newOrder);
+  });
+}
+
 // User Interface Logic
 $(document).ready(function() {
   let newOrder = new Order();
+  attachEventListeners(newOrder);
   $("#orderButton").click(function(event) {
     event.preventDefault;
     $("form#orderPizza").show();
