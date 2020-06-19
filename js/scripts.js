@@ -46,29 +46,38 @@ function Pizza(pizzaSize, pizzaCrust, pizzaSauce, pizzaCheese, pizzaToppings) {
   this.toppings = pizzaToppings;
 }
 
-function selectedToppings() {
-  let selectedToppings = new Array();
-  let pizzaToppings = document.getElementsByClassName(".pizzaToppings");
-  let selections = pizzaToppings.getElementsByClassName(".pizzaToppings");
-  for (let i = 0; i < selections.length; i ++) {
-    if (selections[i].checked) {
-      selectedToppings.push(selections[i].value);
-    }
-  }
-  if (selections.length > 0) {
-    alert("Selected toppings: " + selectedToppings.join(", "));
-  }
-}
+// function selectedToppings(toppings) {
+//   let checkboxes = document.querySelectorAll("input[name='" + toppings + '"]:checked'), values = [];
+//   Array.prototype.forEach.call(checkboxes, function(el) {
+//     values.push(el.value);
+//   })
+//   return values;
+// }
 
-let pizzaSize = ["small", "medium", "large", "extra large"]
 
-let pizzaSauce = ["no sauce", "light sauce", "normal sauce", "extra sauce"]
+// function selectedToppings() {
+//   let selectedToppings = new Array();
+//   let pizzaToppings = document.getElementsByClassName(".pizzaToppings");
+//   let selections = pizzaToppings.getElementsByClassName("pizzaToppings");
+//   for (let i = 0; i < selections.length; i ++) {
+//     if (selections[i].checked) {
+//       selectedToppings.push(selections[i].value);
+//     }
+//   }
+//   if (selections.length > 0) {
+//     alert("Selected toppings: " + selectedToppings.join(", "));
+//   }
+// }
 
-let pizzaCheese = ["no cheese", "light cheese", "normal cheese", "extra cheese"]
+// let pizzaSize = ["small", "medium", "large", "extra large"]
 
-let pizzaCrust = ["thin crust", "hand tossed", "thick crust", "gluten-free"]
+// let pizzaSauce = ["no sauce", "light sauce", "normal sauce", "extra sauce"]
 
-let pizzaToppings = ["pepperoni", "sausage", "beef", "ham", "chicken", "bacon", "anchovies", "mushrooms", "olives", "roasted red peppers", "onions", "spinach", "tomatoes", "banana peppers"]
+// let pizzaCheese = ["no cheese", "light cheese", "normal cheese", "extra cheese"]
+
+// let pizzaCrust = ["thin crust", "hand tossed", "thick crust", "gluten-free"]
+
+// let pizzaToppings = ["pepperoni", "sausage", "beef", "ham", "chicken", "bacon", "anchovies", "mushrooms", "olives", "roasted red peppers", "onions", "spinach", "tomatoes", "banana peppers"]
 
 let pizzaOrder = new Pizza;
 
@@ -122,11 +131,16 @@ $(document).ready(function() {
   })
   $("form#orderPizza").submit(function(event) {
     event.preventDefault();
+    
     const pizzaSize = $("input:radio[name=pizzaSize]:checked").val();
     const pizzaCrust = $("input:radio[name=pizzaCrust]:checked").val();
     const pizzaSauce = $("input:radio[name=pizzaSauce]:checked").val();
     const pizzaCheese = $("input:radio[name=pizzaCheese]:checked").val();
-    const pizzaToppings = $("input:radio[name=pizzaToppings]:checked").val();
+    const pizzaToppings = [];
+    // const pizzaToppings = $("input:checkbox[name=pizzaToppings]:checked").val();
+    $(".pizzaToppings input:checked").each(function() {
+      pizzaToppings.push($(this).val());
+    })
     // $("input:radio[name=pizzaSize]:checked").val("");
     // $("input:radio[name=pizzaCrust]:checked").val("");
     // $("input:radio[name=pizzaSauce]:checked").val("");
@@ -136,8 +150,7 @@ $(document).ready(function() {
     console.log(newPizza);
     newOrder.addPizza(newPizza);
     displayPizzaDetails(newOrder);
-    selectedToppings(pizzaToppings);
-    console.log(selectedToppings);
+    console.log(pizzaToppings);
   })
 
 })
