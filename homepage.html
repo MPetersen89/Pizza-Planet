@@ -22,12 +22,24 @@
         <h2>Select Size</h2>
         <input type="radio" name="pizzaSize" id="smallPizza" value="small">
         <label for="smallPizza">Small (10")</label>
-        <input type="radio" name="pizzaSize" id="mediumPizza" value="medium">
+        <div class="pizza-item-details">
+          <span class="pizza-item-price">$6.99 + Toppings</span>
+        </div>
+        <input type="radio" name="pizzaSize" id="mediumPizza" value="medium 9">
         <label for="mediumPizza">Medium (12")</label>
-        <input type="radio" name="pizzaSize" id="largePizza" value="large">
+        <div class="pizza-item-details">
+          <span class="pizza-item-price">$8.99 + Toppings</span>
+        </div>
+        <input type="radio" name="pizzaSize" id="largePizza" value="large 11">
         <label for="largePizza">Large (14")</label>
-        <input type="radio" name="pizzaSize" id="xLargePizza" value="x-large">
+        <div class="pizza-item-details">
+          <span class="pizza-item-price">$10.99 + Toppings</span>
+        </div>
+        <input type="radio" name="pizzaSize" id="xLargePizza" value="x-large 13">
         <label for="xLargePizza">X-Large (16")</label>
+        <div class="pizza-item-details">
+          <span class="pizza-item-price">$12.99 + Toppings</span>
+        </div>
       </div>
       <div class="pizzaCrust">
         <h2>Select Crust</h2>
@@ -64,42 +76,47 @@
       </div>
       <div class="pizzaToppings">
         <h2>Select Toppings</h2>
-        <h6>Meats</h6>
-        <input type="checkbox" name="pizzaToppings" id="pepperoniTopping" value="pepperoni">
-        <label for="pepperoniTopping">Pepperoni</label>
-        <input type="checkbox" name="pizzaToppings" id="sausageTopping" value="sausage">
-        <label for="sausageTopping">Sausage</label>
-        <input type="checkbox" name="pizzaToppings" id="beefTopping" value="beef">
-        <label for="beefTopping">Beef</label>
-        <input type="checkbox" name="pizzaToppings" id="hamTopping" value="ham">
-        <label for="hamTopping">Ham</label>
-        <input type="checkbox" name="pizzaToppings" id="chickenTopping" value="chicken">
-        <label for="chickenTopping">Chicken</label>
-        <input type="checkbox" name="pizzaToppings" id="baconTopping" value="bacon">
-        <label for="baconTopping">Bacon</label>
-        <input type="checkbox" name="pizzaToppings" id="anchoviesTopping" value="anchovies">
-        <label for="anchoviesTopping">Anchovies</label><br>
-        <h6>Veggies</h6>
-        <input type="checkbox" name="pizzaToppings" id="mushroomsTopping" value="mushrooms">
-        <label for="mushroomsTopping">Mushrooms</label>
-        <input type="checkbox" name="pizzaToppings" id="olivesTopping" value="olives">
-        <label for="olivesTopping">Olives</label>
-        <input type="checkbox" name="pizzaToppings" id="redPeppersTopping" value="roasted red peppers">
-        <label for="redPeppersTopping">Roasted Red Peppers</label>
-        <input type="checkbox" name="pizzaToppings" id="onionsTopping" value="onions">
-        <label for="onionsTopping">Onions</label>
-        <input type="checkbox" name="pizzaToppings" id="spinachTopping" value="spinach">
-        <label for="spinachTopping">Spinach</label>
-        <input type="checkbox" name="pizzaToppings" id="tomatoesTopping" value="tomatoes">
-        <label for="tomatoesTopping">Tomatoes</label>
-        <input type="checkbox" name="pizzaToppings" id="bananaPeppersTopping" value="banana peppers">
-        <label for="bananaPeppersTopping">Banana Peppers</label>
+        <div class="meat">
+          <h3>Meats ($1.00 each)</h3>
+          <input type="checkbox" name="pizzaToppings" id="pepperoniTopping" value="pepperoni">
+          <label for="pepperoniTopping" class="item-price">Pepperoni</label>
+          <input type="checkbox" name="pizzaToppings" id="sausageTopping" value="sausage">
+          <label for="sausageTopping" class="item-price">Sausage</label>
+          <input type="checkbox" name="pizzaToppings" id="beefTopping" value="beef">
+          <label for="beefTopping" class="item-price">Beef</label>
+          <input type="checkbox" name="pizzaToppings" id="hamTopping" value="ham">
+          <label for="hamTopping" class="item-price">Ham</label>
+          <input type="checkbox" name="pizzaToppings" id="chickenTopping" value="chicken">
+          <label for="chickenTopping" class="item-price">Chicken</label>
+          <input type="checkbox" name="pizzaToppings" id="baconTopping" value="bacon">
+          <label for="baconTopping" class="item-price">Bacon</label>>
+          <input type="checkbox" name="pizzaToppings" id="anchoviesTopping" value="anchovies">
+          <label for="anchoviesTopping" class="item-price">Anchovies</label>
+        </div>
+        <div class="veggies">
+          <h3>Veggies ($.50 each)</h3>
+          <input type="checkbox" name="pizzaToppings" id="mushroomsTopping" value="mushrooms">
+          <label for="mushroomsTopping">Mushrooms</label>
+          <input type="checkbox" name="pizzaToppings" id="olivesTopping" value="olives">
+          <label for="olivesTopping">Olives</label>
+          <input type="checkbox" name="pizzaToppings" id="redPeppersTopping" value="roasted red peppers">
+          <label for="redPeppersTopping">Roasted Red Peppers</label>
+          <input type="checkbox" name="pizzaToppings" id="onionsTopping" value="onions">
+          <label for="onionsTopping">Onions</label>
+          <input type="checkbox" name="pizzaToppings" id="spinachTopping" value="spinach">
+          <label for="spinachTopping">Spinach</label>
+          <input type="checkbox" name="pizzaToppings" id="tomatoesTopping" value="tomatoes">
+          <label for="tomatoesTopping">Tomatoes</label>
+          <input type="checkbox" name="pizzaToppings" id="bananaPeppersTopping" value="banana peppers">
+          <label for="bananaPeppersTopping">Banana Peppers</label>
+        </div>
       </div>
       <button type="submit" name="submitOrder" class="button btn-warning btn-lg active" id="submitOrder">Add To Cart</button>
     </form>
     <div id="currentOrder">
       <h2>Current Order:</h2>
       <ul id="pizzas">
+      <h2>Total: <span id="total"></span></h2>
       </ul>
     </div>
     <div id="orderReview">

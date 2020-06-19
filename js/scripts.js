@@ -37,59 +37,43 @@ Order.prototype.deletePizza = function(id) {
   return false;
 }
 
-function Pizza(pizzaSize, pizzaCrust, pizzaSauce, pizzaCheese, pizzaToppings) {
-  // this.count = pizzaNumber;
+function Pizza(pizzaSize, pizzaCrust, pizzaSauce, pizzaCheese, pizzaToppings, pizzaCost) {
   this.size = pizzaSize;
   this.crust = pizzaCrust;
   this.sauce = pizzaSauce;
   this.cheese = pizzaCheese;
   this.toppings = pizzaToppings;
+  this.cost = pizzaCost;
 }
-
-// function selectedToppings(toppings) {
-//   let checkboxes = document.querySelectorAll("input[name='" + toppings + '"]:checked'), values = [];
-//   Array.prototype.forEach.call(checkboxes, function(el) {
-//     values.push(el.value);
-//   })
-//   return values;
-// }
-
-
-// function selectedToppings() {
-//   let selectedToppings = new Array();
-//   let pizzaToppings = document.getElementsByClassName(".pizzaToppings");
-//   let selections = pizzaToppings.getElementsByClassName("pizzaToppings");
-//   for (let i = 0; i < selections.length; i ++) {
-//     if (selections[i].checked) {
-//       selectedToppings.push(selections[i].value);
-//     }
-//   }
-//   if (selections.length > 0) {
-//     alert("Selected toppings: " + selectedToppings.join(", "));
-//   }
-// }
-
-// let pizzaSize = ["small", "medium", "large", "extra large"]
-
-// let pizzaSauce = ["no sauce", "light sauce", "normal sauce", "extra sauce"]
-
-// let pizzaCheese = ["no cheese", "light cheese", "normal cheese", "extra cheese"]
-
-// let pizzaCrust = ["thin crust", "hand tossed", "thick crust", "gluten-free"]
-
-// let pizzaToppings = ["pepperoni", "sausage", "beef", "ham", "chicken", "bacon", "anchovies", "mushrooms", "olives", "roasted red peppers", "onions", "spinach", "tomatoes", "banana peppers"]
 
 let pizzaOrder = new Pizza;
 
-Pizza.prototype.Cost = function() {
-
-}
+Pizza.prototype.cost = function(cost) {
+  if ($("input:radio[id=smallPizza]:checked").val()) {
+    cost = '"$" + 6.99'
+  } else if ($("input:radio[id=mediumPizza]:checked").val()) {
+    cost = '"$" + 8.99'
+  } else if ($("input:radio[id=largePizza]:checked").val()) {
+    cost = '"$" + 10.99'
+  } else if ($("input:radio[id=xLargePizza]:checked").val()) {
+    cost = '"$" + 12.99'
+  }
+  if (meat >= 1)
+    cost.meat.forEach(function(Pizza) {
+      Pizza.cost += 1.00
+    });
+  if (veggies >= 1)
+    cost.veggies.forEach(function(Pizza) {
+      Pizza.cost += .50
+    })
+  console.log(Pizza.cost);
+} 
 
 function displayPizzaDetails(newOrderToDisplay) {
   let pizzaList = $("ul#pizzas");
   let htmlforPizzaInfo = "";
   newOrderToDisplay.pizzaDetails.forEach(function(pizza) {
-    htmlforPizzaInfo += "<li class=" + pizza.id + ">" + pizza.size + " " + pizza.crust + " with " + pizza.toppings + "</li>";
+    htmlforPizzaInfo += "<li class=" + pizza.id + ">" + pizza.size + " " + pizza.crust + " pizza with " + pizza.toppings + "</li>";
   });
   pizzaList.html(htmlforPizzaInfo);
 }
@@ -109,7 +93,6 @@ function orderReview(pizzaId, newOrder) {
 
 function attachEventListeners(newOrder) {
   $("us#pizzas").on("click", "li", function() {
-    console.log("the id of this <li> is " + $(this).attr("class") + ".");
     orderReview($(this).attr("class"), newOrder);
   });
   $("#reviewButtons").on("click", ".removeButton", function() {
@@ -122,11 +105,12 @@ function attachEventListeners(newOrder) {
 }
 
 // User Interface Logic
+
 $(document).ready(function() {
   let newOrder = new Order();
   attachEventListeners(newOrder);
   $("#orderButton").click(function(event) {
-    event.preventDefault;
+    event.preventDefault();
     $("form#orderPizza").show();
   })
   $("form#orderPizza").submit(function(event) {
@@ -137,21 +121,15 @@ $(document).ready(function() {
     const pizzaSauce = $("input:radio[name=pizzaSauce]:checked").val();
     const pizzaCheese = $("input:radio[name=pizzaCheese]:checked").val();
     const pizzaToppings = [];
-    // const pizzaToppings = $("input:checkbox[name=pizzaToppings]:checked").val();
     $(".pizzaToppings input:checked").each(function() {
       pizzaToppings.push($(this).val());
     })
-    // $("input:radio[name=pizzaSize]:checked").val("");
-    // $("input:radio[name=pizzaCrust]:checked").val("");
-    // $("input:radio[name=pizzaSauce]:checked").val("");
-    // $("input:radio[name=pizzaCheese]:checked").val("");
-    // $("input:radio[name=pizzaToppings]:checked").val("");
-    let newPizza = new Pizza(pizzaSize, pizzaCrust, pizzaSauce, pizzaCheese, pizzaToppings);
+    let newPizza = new Pizza(pizzaSize, pizzaCrust, pizzaSauce, pizzaCheese, pizzaToppings, pizzaCost);
     console.log(newPizza);
+    console.log(Pizza.cost);
     newOrder.addPizza(newPizza);
     displayPizzaDetails(newOrder);
-    console.log(pizzaToppings);
+    $("#currentOrder").show();
   })
-
 })
 
