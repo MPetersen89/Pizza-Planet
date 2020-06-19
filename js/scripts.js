@@ -1,6 +1,12 @@
 // Business Logic
+function Order() {
+  this.pizzaDetails = [];
+  this.pizzaId = 0
+}
 
-function Pizza (pizzaNumber, pizzaSize, pizzaCrust, pizzaSauce, pizzaCheese, pizzaToppings) {
+Order.prototype.addPizza = function(pizza)
+
+function Pizza(pizzaNumber, pizzaSize, pizzaCrust, pizzaSauce, pizzaCheese, pizzaToppings) {
   this.count = pizzaNumber;
   this.size = pizzaSize;
   this.crust = pizzaCrust;
@@ -30,8 +36,19 @@ $(document).ready(function() {
   let newPizza = new Pizza();
   $("#orderButton").click(function(event) {
     event.preventDefault;
-    console.log("order button works");
     $("form#orderPizza").show();
   })
+  $("form#orderPizza").submit(function() {
+    const pizzaSize = $("input:radio[name=pizzaSize]:checked").val();
+    const pizzaCrust = $("input:radio[name=pizzaCrust]:checked").val();
+    const pizzaSauce = $("input:radio[name=pizzaSauce]:checked").val();
+    const pizzaCheese = $("input:radio[name=pizzaCheese]:checked").val();
+    const pizzaToppings = $("input:radio[name=pizzaToppings]:checked").val();
+    let newPizza = new Pizza(pizzaDetails)
+      let pizzaDetails = [pizzaSize, pizzaCrust, pizzaSauce, pizzaCheese, pizzaToppings]
+      return newPizza
+    console.log(newPizza);
+  })
+
 })
 
