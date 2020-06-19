@@ -1,6 +1,27 @@
 .container {
-  text-align: center;
   background-color: white;
-  columns: 1;
+  text-align: center;
+}
+
+.homepage {
+  background-color: rgb(210, 15, 15);
+  color: antiquewhite;
+}
+
+button {
+  color: black;
+}
+
+#spaceshipLogo {
+  float: left;
+}
+
+#orderPizza {
+  display: none;
+  text-align: center;
+  align-content: center;
+  vertical-align: center;
+  align-items: center;
+  margin-top: 10em;
 }
 
