@@ -37,13 +37,27 @@ Order.prototype.deletePizza = function(id) {
   return false;
 }
 
-function Pizza(pizzaNumber, pizzaSize, pizzaCrust, pizzaSauce, pizzaCheese, pizzaToppings) {
-  this.count = pizzaNumber;
+function Pizza(pizzaSize, pizzaCrust, pizzaSauce, pizzaCheese, pizzaToppings) {
+  // this.count = pizzaNumber;
   this.size = pizzaSize;
   this.crust = pizzaCrust;
   this.sauce = pizzaSauce;
   this.cheese = pizzaCheese;
   this.toppings = pizzaToppings;
+}
+
+function selectedToppings() {
+  let selectedToppings = new Array();
+  let pizzaToppings = document.getElementsByClassName(".pizzaToppings");
+  let selections = pizzaToppings.getElementsByClassName(".pizzaToppings");
+  for (let i = 0; i < selections.length; i ++) {
+    if (selections[i].checked) {
+      selectedToppings.push(selections[i].value);
+    }
+  }
+  if (selections.length > 0) {
+    alert("Selected toppings: " + selectedToppings.join(", "));
+  }
 }
 
 let pizzaSize = ["small", "medium", "large", "extra large"]
@@ -54,18 +68,19 @@ let pizzaCheese = ["no cheese", "light cheese", "normal cheese", "extra cheese"]
 
 let pizzaCrust = ["thin crust", "hand tossed", "thick crust", "gluten-free"]
 
-let pizzaToppings = ["cheese", "pepperoni", "sausage", "beef", "ham", "chicken", "bacon", "anchovies", "mushrooms", "olives", "roasted red peppers", "onions", "spinach", "tomatoes", "banana peppers"]
+let pizzaToppings = ["pepperoni", "sausage", "beef", "ham", "chicken", "bacon", "anchovies", "mushrooms", "olives", "roasted red peppers", "onions", "spinach", "tomatoes", "banana peppers"]
 
 let pizzaOrder = new Pizza;
 
 Pizza.prototype.Cost = function() {
+
 }
 
 function displayPizzaDetails(newOrderToDisplay) {
   let pizzaList = $("ul#pizzas");
   let htmlforPizzaInfo = "";
   newOrderToDisplay.pizzaDetails.forEach(function(pizza) {
-    htmlforPizzaInfo += "<li class=" + pizza.id + ">" + pizza.size + pizza.crust + pizza.toppings + "</li>";
+    htmlforPizzaInfo += "<li class=" + pizza.id + ">" + pizza.size + " " + pizza.crust + " with " + pizza.toppings + "</li>";
   });
   pizzaList.html(htmlforPizzaInfo);
 }
@@ -74,7 +89,7 @@ function orderReview(pizzaId, newOrder) {
   const pizzaReview = newOrder.searchPizza(pizzaId);
   $("#orderReview").show();
   $(".pizza-size").html(pizzaReview.size);
-  $(".pizza-crust").html(pizzaReview.size);
+  $(".pizza-crust").html(pizzaReview.crust);
   $(".pizza-sauce").html(pizzaReview.sauce);
   $(".pizza-cheese").html(pizzaReview.cheese);
   $(".pizza-toppings").html(pizzaReview.toppings);
@@ -105,7 +120,8 @@ $(document).ready(function() {
     event.preventDefault;
     $("form#orderPizza").show();
   })
-  $("form#orderPizza").submit(function() {
+  $("form#orderPizza").submit(function(event) {
+    event.preventDefault();
     const pizzaSize = $("input:radio[name=pizzaSize]:checked").val();
     const pizzaCrust = $("input:radio[name=pizzaCrust]:checked").val();
     const pizzaSauce = $("input:radio[name=pizzaSauce]:checked").val();
@@ -117,8 +133,11 @@ $(document).ready(function() {
     // $("input:radio[name=pizzaCheese]:checked").val("");
     // $("input:radio[name=pizzaToppings]:checked").val("");
     let newPizza = new Pizza(pizzaSize, pizzaCrust, pizzaSauce, pizzaCheese, pizzaToppings);
+    console.log(newPizza);
     newOrder.addPizza(newPizza);
     displayPizzaDetails(newOrder);
+    selectedToppings(pizzaToppings);
+    console.log(selectedToppings);
   })
 
 })
