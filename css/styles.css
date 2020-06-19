@@ -25,3 +25,10 @@ button {
   margin-top: 10em;
 }
 
+#currentOrder {
+  display: none;
+}
+
+#reviewOrder {
+  display: none;
+}

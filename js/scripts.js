@@ -70,6 +70,19 @@ function displayPizzaDetails(newOrderToDisplay) {
   pizzaList.html(htmlforPizzaInfo);
 }
 
+function orderReview(pizzaId, newOrder) {
+  const pizzaReview = newOrder.searchPizza(pizzaId);
+  $("#orderReview").show();
+  $(".pizza-size").html(pizzaReview.size);
+  $(".pizza-crust").html(pizzaReview.size);
+  $(".pizza-sauce").html(pizzaReview.sauce);
+  $(".pizza-cheese").html(pizzaReview.cheese);
+  $(".pizza-toppings").html(pizzaReview.toppings);
+  let reviewButtons = $("#reviewButtons");
+  reviewButtons.empty();
+  reviewButtons.append(`<button class='removeButton ${pizza.id}'>Remove</button>`);
+}
+
 // User Interface Logic
 $(document).ready(function() {
   let newOrder = new Order();
