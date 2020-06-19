@@ -4,7 +4,38 @@ function Order() {
   this.pizzaId = 0
 }
 
-Order.prototype.addPizza = function(pizza)
+Order.prototype.addPizza = function(pizza) {
+  pizza.id = this.assignId();
+  this.pizzaDetails.push(pizza);
+}
+
+Order.prototype.assignId = function() {
+  this.pizzaId += 1;
+  return this.pizzaId;
+}
+
+Order.prototype.searchPizza = function(id) {
+  for (let i=0; i< this.pizzaDetails.length; i++) {
+    if (this.pizzaDetails[i]) {
+      if (this.pizzaDetails[i].id == id) {
+        return this.pizzaDetails[i];
+      }
+    }
+  };
+  return false;
+}
+
+Order.prototype.deletePizza = function(id) {
+  for (let i=0; i< this.pizzaDetails.length; i++) {
+    if (this.pizzaDetails[i]) {
+      if (this.pizzaDetails[i].id == id) {
+        delete this.pizzaDetails[i];
+        return true;
+      }
+    }
+  }
+  return false;
+}
 
 function Pizza(pizzaNumber, pizzaSize, pizzaCrust, pizzaSauce, pizzaCheese, pizzaToppings) {
   this.count = pizzaNumber;
@@ -28,12 +59,20 @@ let pizzaToppings = ["cheese", "pepperoni", "sausage", "beef", "ham", "chicken",
 let pizzaOrder = new Pizza;
 
 Pizza.prototype.Cost = function() {
+}
 
+function displayPizzaDetails(newOrderToDisplay) {
+  let pizzaList = $("ul#pizzas");
+  let htmlforPizzaInfo = "";
+  newOrderToDisplay.pizzaDetails.forEach(function(pizza) {
+    htmlforPizzaInfo += "<li class=" + pizza.id + ">" + pizza.size + pizza.crust + pizza.toppings + "</li>";
+  });
+  pizzaList.html(htmlforPizzaInfo);
 }
 
 // User Interface Logic
 $(document).ready(function() {
-  let newPizza = new Pizza();
+  let newOrder = new Order();
   $("#orderButton").click(function(event) {
     event.preventDefault;
     $("form#orderPizza").show();
@@ -44,10 +83,14 @@ $(document).ready(function() {
     const pizzaSauce = $("input:radio[name=pizzaSauce]:checked").val();
     const pizzaCheese = $("input:radio[name=pizzaCheese]:checked").val();
     const pizzaToppings = $("input:radio[name=pizzaToppings]:checked").val();
-    let newPizza = new Pizza(pizzaDetails)
-      let pizzaDetails = [pizzaSize, pizzaCrust, pizzaSauce, pizzaCheese, pizzaToppings]
-      return newPizza
-    console.log(newPizza);
+    // $("input:radio[name=pizzaSize]:checked").val("");
+    // $("input:radio[name=pizzaCrust]:checked").val("");
+    // $("input:radio[name=pizzaSauce]:checked").val("");
+    // $("input:radio[name=pizzaCheese]:checked").val("");
+    // $("input:radio[name=pizzaToppings]:checked").val("");
+    let newPizza = new Pizza(pizzaSize, pizzaCrust, pizzaSauce, pizzaCheese, pizzaToppings);
+    newOrder.addPizza(newPizza);
+    displayPizzaDetails(newOrder);
   })
 
 })
