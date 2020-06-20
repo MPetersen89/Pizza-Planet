@@ -12,7 +12,9 @@ _This is a project designed to test my skills at creating working constructor an
 
 | **Behavior**    |    **_Example Input_**      |       **_Example Output_**          |
 |-------------|-----------------------|-------------------------------|
-|**Program will**
+|**Program will take values of selected items into an array** | "small", "hand-tossed", "pepperoni", "olives" | ["small", "hand-tossed", "pepperoni", "olives"] |
+|**Program will display selections back to user** | "small", "hand-tossed", "pepperoni", "olives" | "small, hand-tossed pizza with pepperoni, olives" |
+|**Program will calculate cost based on size and toppings** | "small", "hand-tossed", "pepperoni", "olives" | $8.49 |
 
 ## Setup/Installation Requirements
 
@@ -35,7 +37,7 @@ Open GH-Pages Environment:
 
 ## Known Bugs
 
-_Page no worky yet._
+_Currently does not calculate cost. Display functionality is a bit wonky._
 
 ## Support and contact details
 
